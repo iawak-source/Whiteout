@@ -2,9 +2,12 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+<<<<<<< HEAD
 # Recommended: add any editor/OS/tool-specific ignore rules from the Global/ templates as needed.
 # See: https://github.com/github/gitignore/tree/main/Global
 #
+=======
+>>>>>>> 899b4f5 (Test some Input System Action)
 .utmp/
 /[Ll]ibrary/
 /[Tt]emp/
@@ -46,7 +49,10 @@ ExportedObj/
 *.csproj
 *.unityproj
 *.sln
+<<<<<<< HEAD
 *.slnx
+=======
+>>>>>>> 899b4f5 (Test some Input System Action)
 *.suo
 *.tmp
 *.user
@@ -100,7 +106,15 @@ InitTestScene*.unity*
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
 
 # Auto-generated scenes by play mode tests
+<<<<<<< HEAD
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+=======
+<<<<<<< HEAD
+/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+=======
+/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+>>>>>>> 56de716db2fd58df5baeca25a8e1aab487f7f05d
+>>>>>>> 899b4f5 (Test some Input System Action)
