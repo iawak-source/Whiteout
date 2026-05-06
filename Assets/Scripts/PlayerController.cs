@@ -7,23 +7,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float baseSpeed = 15f;
     [SerializeField] float boostSpeed = 20f;
 
+    public bool canControlPlayer = true;
 
     InputAction moveAction;
     Rigidbody2D myRigidbody2D;
     Vector2 moveVector;
     SurfaceEffector2D mySurfaceEffector2D;
+    ScoreManager scoreManager;
+    float previousRotation;
+    float totalRotation;
+    // float flipCount;
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         myRigidbody2D = GetComponent<Rigidbody2D>();
         mySurfaceEffector2D = FindFirstObjectByType<SurfaceEffector2D>();
+        scoreManager = FindFirstObjectByType<ScoreManager>();
     }
 
 
     void Update()
     {
-        RotatePlayer();
-        BoostPlayer();
+        if (canControlPlayer)
+        {
+            RotatePlayer();
+            BoostPlayer();
+            CalculateFlip();
+        }
     }
     void RotatePlayer()
     {
@@ -48,6 +58,50 @@ public class PlayerController : MonoBehaviour
         else
         {
             mySurfaceEffector2D.speed = baseSpeed;
+        }
+    }
+
+    void CalculateFlip()
+    {
+        float currentRotation = transform.rotation.eulerAngles.z;
+
+        totalRotation += Mathf.DeltaAngle(previousRotation, currentRotation);
+        if (totalRotation > 340 || totalRotation < -340)
+        {
+            // flipCount++;
+            totalRotation = 0;
+            scoreManager.addScore(100);
+        }
+        previousRotation = currentRotation;
+    }
+
+    public void DisableControls()
+    {
+        canControlPlayer = false;
+    }
+
+    public void ActivatePowerup(PowerupSO powerup)
+    {
+        if (powerup.GetPowerupType() == "speed")
+        {
+            baseSpeed += powerup.GetValueChange();
+            boostSpeed += powerup.GetValueChange();
+        }
+        else if (powerup.GetPowerupType() == "torque")
+        {
+            torqueAmount += powerup.GetValueChange();
+        }
+    }
+    public void DeactivatePowerup(PowerupSO powerup)
+    {
+        if (powerup.GetPowerupType() == "speed")
+        {
+            baseSpeed -= powerup.GetValueChange();
+            boostSpeed -= powerup.GetValueChange();
+        }
+        else if (powerup.GetPowerupType() == "torque")
+        {
+            torqueAmount -= powerup.GetValueChange();
         }
     }
 }
