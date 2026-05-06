@@ -54,6 +54,7 @@ Assets/Scripts/
  CrashDetector.cs
  FinishLine.cs
  PlayerController.cs
+ SnowTrail.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
