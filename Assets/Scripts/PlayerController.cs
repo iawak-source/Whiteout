@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float boostSpeed = 20f;
     [SerializeField] ParticleSystem powerupParticle;
 
-    public bool canControlPlayer = true;
+
 
     InputAction moveAction;
     Rigidbody2D myRigidbody2D;
@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     SurfaceEffector2D mySurfaceEffector2D;
     ScoreManager scoreManager;
 
+    public bool canControlPlayer = true;
     float previousRotation;
     float totalRotation;
     int activePowerupCount;
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         powerupParticle.Play();
         activePowerupCount += 1;
-        
+
         if (powerup.GetPowerupType() == "speed")
         {
             baseSpeed += powerup.GetValueChange();
