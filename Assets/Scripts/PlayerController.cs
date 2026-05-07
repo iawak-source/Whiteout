@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float torqueAmount = 1f;
     [SerializeField] float baseSpeed = 15f;
     [SerializeField] float boostSpeed = 20f;
+    [SerializeField] ParticleSystem powerupParticle;
 
     public bool canControlPlayer = true;
 
@@ -14,8 +15,10 @@ public class PlayerController : MonoBehaviour
     Vector2 moveVector;
     SurfaceEffector2D mySurfaceEffector2D;
     ScoreManager scoreManager;
+
     float previousRotation;
     float totalRotation;
+    int activePowerupCount;
     // float flipCount;
     void Start()
     {
@@ -82,6 +85,9 @@ public class PlayerController : MonoBehaviour
 
     public void ActivatePowerup(PowerupSO powerup)
     {
+        powerupParticle.Play();
+        activePowerupCount += 1;
+        
         if (powerup.GetPowerupType() == "speed")
         {
             baseSpeed += powerup.GetValueChange();
@@ -94,6 +100,12 @@ public class PlayerController : MonoBehaviour
     }
     public void DeactivatePowerup(PowerupSO powerup)
     {
+        activePowerupCount -= 1;
+        if (activePowerupCount <= 0)
+        {
+            activePowerupCount = 0; // Ensure it doesn't go negative
+            powerupParticle.Stop();
+        }
         if (powerup.GetPowerupType() == "speed")
         {
             baseSpeed -= powerup.GetValueChange();
